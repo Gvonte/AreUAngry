@@ -45,7 +45,7 @@ export default {
 <style scoped lang="less">
 .store {
   .header {
-    margin-top: 44px;
+    margin-top: 50px;
   }
   .title {
     font-size: 16px;
