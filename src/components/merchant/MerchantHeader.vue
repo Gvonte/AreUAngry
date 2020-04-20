@@ -1,12 +1,12 @@
 <template>
   <div class="header">
     <div class="top">
-      <img :src="merchantData.img" />
+      <img :src="merchantData.avatar" />
       <div class="word">
         <i class="brand"></i>
-        <span class="name">{{merchantData.merchantName}}</span>
-        <span class="phone">{{`Tel：${merchantData.merchantPhone}`}}</span>
-        <p class="text">{{merchantData.merchantAddress}}</p>
+        <span class="name">{{merchantData.name}}</span>
+        <span class="phone">{{`Tel：${merchantData.score}`}}</span>
+        <p class="text">{{merchantData.infos && merchantData.infos[2]}}</p>
       </div>
     </div>
     <div class="bottom">
@@ -15,7 +15,7 @@
       <span class="bulletin-text">{{merchantData.bulletin}}</span>
     </div>
     <!-- 图片设置定位与z-index: -1，用作背景图片 -->
-    <img :src="merchantData.img" width="100%" height="100%" class="back" />
+    <img :src="merchantData.avatar" width="100%" height="100%" class="back" />
   </div>
 </template>
 
@@ -31,7 +31,7 @@ export default {
   },
   created() {
     getMerchantInfo(this.merchantId).then(res => {
-      this.merchantData = res.data.data.merchant;
+      this.merchantData = res.data.data;
     });
   }
 };
@@ -83,6 +83,7 @@ export default {
 
     .phone {
       float: right;
+      // margin-top: -20px;
       padding: 0 9px;
       line-height: 28px;
       border-radius: 10px;

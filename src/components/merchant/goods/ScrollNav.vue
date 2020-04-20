@@ -65,10 +65,23 @@ export default {
   },
   props: ["merchantId"],
   created() {
+    // 初始获取title的left、top值
     getGoodsList(this.merchantId).then(res => {
-      this.goodsList = res.data.data.list;
-      this.typeList = res.data.data.list.map(item => item.name);
-      this.clickLI = res.data.data.list[0].name;
+      this.goodsList = res.data.data;
+      this.typeList = res.data.data.map(item => item.name);
+      this.clickLI = res.data.data[0].name;
+      const { left, top } = this.offsetLAndT(this.$refs.title);
+      this.titleLeft = left;
+      this.titleTop = top;
+      // 放在这里最适合
+      this.$nextTick(() => {
+        Object.keys(this.$refs).forEach(key => {
+          if (key !== "right" && key !== "title") {
+            const item = this.$refs[key][0];
+            this.positionInfoList.push(item.offsetTop);
+          }
+        });
+      });
     });
   },
   mounted() {
@@ -83,14 +96,14 @@ export default {
     goodsList: {
       // 不能用箭头函数定义watch函数，否则this指向有问题
       handler: function() {
-        this.$nextTick(() => {
-          Object.keys(this.$refs).forEach(key => {
-            if (key !== "right" && key !== "title") {
-              const item = this.$refs[key][0];
-              this.positionInfoList.push(item.offsetTop);
-            }
-          });
-        });
+        // this.$nextTick(() => {
+        //   Object.keys(this.$refs).forEach(key => {
+        //     if (key !== "right" && key !== "title") {
+        //       const item = this.$refs[key][0];
+        //       this.positionInfoList.push(item.offsetTop);
+        //     }
+        //   });
+        // });
       },
       deep: true
     }
@@ -130,14 +143,24 @@ export default {
       const h = this.$refs[typeAry[0]][0].offsetHeight; //获取标题的高度
       if (!scrollAry[index + 1] || scrollAry[index + 1] - scrollTop > h) {
         this.$refs["title"].style.position = "fixed";
-        this.$refs["title"].style.top = "232px";
-        this.$refs["title"].style.left = "80px";
+        this.$refs["title"].style.top = this.titleTop + "px";
+        this.$refs["title"].style.left = this.titleLeft + "px";
         this.$refs["title"].innerHTML = typeAry[index];
       } else {
         this.$refs["title"].style.position = "absolute";
         this.$refs["title"].style.top = scrollAry[index + 1] - h + "px";
         this.$refs["title"].style.left = "0";
       }
+    },
+    offsetLAndT(el) {
+      let left = 0;
+      let top = 0;
+      while (el) {
+        left += el.offsetLeft;
+        top += el.offsetTop;
+        el = el.offsetParent;
+      }
+      return { left, top };
     }
   },
   components: {
@@ -167,7 +190,7 @@ export default {
     width: 80px;
     height: 100%;
     font-size: 12px;
-    overflow-x: hidden;
+    // overflow-x: hidden;
     overflow-y: auto;
 
     &::-webkit-scrollbar {

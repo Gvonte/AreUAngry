@@ -28,7 +28,7 @@ export default {
     },
     beforeEnter(el) {
       let x = this.left - 45,
-        y = document.documentElement.clientHeight - this.top - 62;
+        y = document.documentElement.clientHeight - this.top - 50;
       el.style.transform = `translate(${x}px, 0)`;
       el.querySelector(".inner").style.transform = `translate(0, ${-y}px)`;
     },
@@ -42,8 +42,8 @@ export default {
       el.addEventListener("transitionend", done);
     },
     afterEnter() {
-      this.show = false;
-      this.$emit("transitionend");
+      // this.$emit("transitionend");
+      this.remove()
     }
   }
 };

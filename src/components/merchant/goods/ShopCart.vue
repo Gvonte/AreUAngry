@@ -111,7 +111,8 @@ export default {
       z-index: 23;
       margin-top: -8px;
       margin-left: -18px;
-      padding: 0 5px;
+      // padding: 0 5px;
+      width: 16px;
       height: 16px;
       line-height: 16px;
       text-align: center;

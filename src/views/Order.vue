@@ -1,24 +1,24 @@
 <template>
   <div class="container">
-    <no-login v-if="!$store.state.user.loginStatus" type="外卖订单" class="no-login" />
+    <no-login v-if="!status" type="外卖订单" class="no-login" />
     <div v-else>
       <h2>我的订单</h2>
-      <!-- <div class="order" v-for="item in orderList" :key="item.orderId">
-        <img :src="item." alt />
+      <div class="order" v-for="item in orderList" :key="item.orderId">
+        <img :src="item.img" alt />
         <span class="status">订单已送达</span>
         <p class="store">黑帮教父></p>
         <p class="time">2019-11-12 10:37</p>
         <p class="food">我与死亡同行-大份</p>
         <span class="price">￥9999.99</span>
-              <van-button plain type="primary">去评价</van-button>
-        <van-button plain type="info">去支付</van-button>
-      </div>-->
-      {{JSON.stringify(orderList)}}
+        <!-- <van-button plain type="primary">去评价</van-button> -->
+        <!-- <van-button plain type="info">去支付</van-button> -->
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+// import { Button } from "vant";
 import { mapState } from "vuex";
 import NoLogin from "../components/NoLogin";
 import getOrderList from "@/service/getOrderList.js";
@@ -39,11 +39,13 @@ export default {
   },
   computed: {
     ...mapState({
-      info: state => state.user.userInfo
+      info: state => state.user.userInfo,
+      status: state => state.user.loginStatus
     })
   },
   components: {
-    NoLogin
+    NoLogin,
+    // [Button.name]: Button
   }
 };
 </script>

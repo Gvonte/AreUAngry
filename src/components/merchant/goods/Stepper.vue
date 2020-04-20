@@ -29,7 +29,7 @@ export default {
       this.addCart(payload);
       if (this.drop) {
         const comp = create(DropAnimate);
-        comp.$on("transitionend", comp.remove);
+        // comp.$on("transitionend", comp.remove);
         comp.start(ev.target);
       }
     }
@@ -53,14 +53,15 @@ export default {
   .move-enter,
   .move-leave-to {
     transform: translateX(50px) rotate(360deg);
-    opacity: 0;
+    // opacity: 0;
   }
 
   // 不想在stepper消失的时候让数字慢慢消失，想让数字直接消失，由左边的按钮滚过去
-  .number-leave-active {
-    transition: none;
+  .number-enter-active {
+    transition: all 0s 0.2s;
   }
 
+  .number-enter,
   .number-leave-to {
     opacity: 0;
   }

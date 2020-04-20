@@ -1,12 +1,13 @@
 <template>
   <div class="comment">
-    <section v-for="item in commentList" class="comment-content">
+    评论
+    <!-- <section v-for="item in commentList" class="comment-content" :key="item.id">
       <img src="http://static.galileo.xiaojukeji.com/static/tms/default_header.png" alt />
       <span class="time">item.</span>
       <h3>item.</h3>
       <p>item.</p>
       <span class="food"></span>
-    </section>
+    </section> -->
   </div>
 </template>
 

@@ -10,7 +10,13 @@
         <div class="content">
           <p v-for="item in cart" :key="item.name">
             {{item.name}}
-            <Stepper :food="item" :num="item.count" :drop="false" class="stepper" />
+            <Stepper
+              :food="item"
+              :num="item.count"
+              :drop="false"
+              :merchantId="merchantId"
+              class="stepper"
+            />
             <span class="price">￥{{item.price}}</span>
           </p>
         </div>

@@ -9,12 +9,76 @@ module.exports = {
       // }, 
       before(app) {
         // 模拟接口，模拟后台服务器express
-        app.get("/areuhungry/merchant", function (req, res) {
+        app.get("/areuhungry/user-info", function (req, res) {
           res.json({
             code: 1,
+            success: 1,
+            data: {
+              userInfo: {
+                id: 1,
+                username: "Gvonte",
+                money: 10000
+              }
+            }
+          });
+        });
+        app.post("/areuhungry/user-info/register", function (req, res) {
+          res.json({
+            code: 1,
+            success: 1
+          });
+        });
+        app.post("/areuhungry/user-info/login", function (req, res) {
+          res.json({
+            code: 1,
+            success: 1,
+            data: {
+              token: "this is a token"
+            }
+          });
+        });
+        app.get("/areuhungry/merchant/listForBuyer", function (req, res) {
+          res.json({
+            code: 1,
+            success: 1,
+            data: {
+              merchants: [{ "id": "1196017480389206018", "userId": "1195885412871065601", "merchantName": "小象便当", "merchantAddress": "广州大学城南亭村南亭村南亭商业街5号", "merchantPhone": "5816855", "img": "https://cube.elemecdn.com/0/52/d4cd8ce8f762169c0a52ef78eacfcjpeg.jpeg?x-oss-process=image/format,webp/resize,w_130,h_130,m_fixed" }, { "id": "1196017480389206019", "userId": "1199948157683658754", "merchantName": "贤哥", "merchantAddress": "广州大学城南亭村南亭村南亭商业街5号", "merchantPhone": "5821355", "img": "https://cube.elemecdn.com/f/5a/225d06ebd294becf5854402f6b25cpng.png?x-oss-process=image/format,webp/resize,w_130,h_130,m_fixed" }, { "id": "1196017480389206020", "userId": "1199949891277582337", "merchantName": "重庆麻辣烫", "merchantAddress": "广州大学城南亭村南亭村南亭商业街3号", "merchantPhone": "1876855", "img": "https://cube.elemecdn.com/d/c8/72dc45f36658568b45cf5d6839ecdjpeg.jpeg?x-oss-process=image/format,webp/resize,w_130,h_130,m_fixed" }, { "id": "1196017480389206021", "userId": "1199949891277582334", "merchantName": "一号鸡秘·火锅鸡", "merchantAddress": "广州大学城南亭村南亭村南亭商业街10号", "merchantPhone": "5738855", "img": "https://cube.elemecdn.com/c/91/9eefa5b97af8872a5ffc9ea5fd3a9jpeg.jpeg?x-oss-process=image/format,webp/resize,w_130,h_130,m_fixed" }, { "id": "1196017480389206022", "userId": "1199949891277582354", "merchantName": "喵喵烤肉饭(大学城店)", "merchantAddress": "广州大学城南亭村南亭村南亭商业街15号", "merchantPhone": "5116235", "img": "https://cube.elemecdn.com/3/02/e06d3036c03d77d0902a7a9369058jpeg.jpeg?x-oss-process=image/format,webp/resize,w_130,h_130,m_fixed" }, { "id": "1199949891247896547", "userId": "1199949891277582356", "merchantName": "粥品香坊（回龙观）", "merchantAddress": "北京市昌平区回龙观西大街龙观置业大厦底商B座102单元1340", "merchantPhone": "5147852", "img": "http://static.galileo.xiaojukeji.com/static/tms/seller_avatar_256px.jpg" }]
+            }
+          });
+        });
+        app.get("/areuhungry/order-master/listForBuyer", function (req, res) {
+          res.json({
+            code: 1,
+            success: 1,
+            data: {
+              list: [
+                {
+                  orderId: 1,
+                  img: 'http://b-ssl.duitang.com/uploads/item/201509/30/20150930140213_ZCFSr.jpeg'
+                },
+                {
+                  orderId: 2,
+                  img: 'http://b-ssl.duitang.com/uploads/item/201509/30/20150930140213_ZCFSr.jpeg'
+                },
+                {
+                  orderId: 3,
+                  img: 'http://b-ssl.duitang.com/uploads/item/201509/30/20150930140213_ZCFSr.jpeg'
+                },
+                {
+                  orderId: 4,
+                  img: 'http://b-ssl.duitang.com/uploads/item/201509/30/20150930140213_ZCFSr.jpeg'
+                }
+              ]
+            }
+          });
+        });
+        app.get("/areuhungry/merchant/getByMerchantId/:id", function (req, res) {
+          res.json({
+            code: 1,
+            success: 1,
             data: {
               "id": 1,
-              "name": "粥品香坊（回龙观）",
+              "name": "粥品香坊",
               "score": 4.2,
               "serviceScore": 4.1,
               "foodScore": 4.3,
@@ -65,6 +129,7 @@ module.exports = {
         app.get("/areuhungry/product-info/listForBuyer", function (req, res) {
           res.json({
             code: 1,
+            success: 1,
             data: [
               {
                 "name": "热销榜",
@@ -1158,8 +1223,8 @@ module.exports = {
   },
   pluginOptions: {
     'cube-ui': {
-      postCompile: true,
-      theme: true
+      postCompile: false,
+      theme: false
     }
   }
 }
